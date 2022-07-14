@@ -57,9 +57,14 @@ export default class CarRepository implements ICarRepository {
     return car ?? null;
   }
 
-  listCar({ color, brand }: IListCarDTO): Promise<ICarDTO[]> {
-    throw new Error("Method not implemented.");
+  async listCar(filter: IListCarDTO): Promise<ICarDTO[]> {
+    const cars = await Car.find(filter).sort({
+      createdAt: -1,
+    });
+
+    return cars;
   }
+
   listCarTrashed(): Promise<ICarDTO[]> {
     throw new Error("Method not implemented.");
   }

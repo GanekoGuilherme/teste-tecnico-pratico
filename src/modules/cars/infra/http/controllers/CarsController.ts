@@ -1,4 +1,5 @@
 import CreateCarService from "@modules/cars/services/CreateCarService";
+import ListCarService from "@modules/cars/services/ListCarService";
 import RecoverCarService from "@modules/cars/services/RecoverCarService";
 import SoftDeleteCarService from "@modules/cars/services/SoftDeleteCarService";
 import UpdateCarService from "@modules/cars/services/UpdateCarService";
@@ -52,5 +53,15 @@ export default class CarsController {
     const car = await recoverCarService.execute(_id);
 
     return response.status(200).json(car);
+  }
+
+  public async list(request: Request, response: Response): Promise<Response> {
+    const listCarService = container.resolve(ListCarService);
+    const cars = await listCarService.execute({
+      color: request.query.color?.toString(),
+      brand: request.query.brand?.toString(),
+    });
+
+    return response.status(200).json(cars);
   }
 }

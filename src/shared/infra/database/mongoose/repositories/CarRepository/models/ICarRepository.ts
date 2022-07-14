@@ -16,6 +16,7 @@ export interface IUpdateCarDTO {
 export interface IListCarDTO {
   color?: string;
   brand?: string;
+  trashed: boolean;
 }
 
 export default interface ICarRepository {
@@ -32,7 +33,7 @@ export default interface ICarRepository {
 
   recoverCar(_id: string): Promise<ICarDTO | null>;
 
-  listCar({ color, brand }: IListCarDTO): Promise<ICarDTO[]>;
+  listCar(filter: IListCarDTO): Promise<ICarDTO[]>;
 
   listCarTrashed(): Promise<ICarDTO[]>;
 

@@ -16,4 +16,6 @@ carsRouter.delete("/:_id", carsController.softDelete);
 
 carsRouter.post("/recover/:_id", carsController.recover);
 
+carsRouter.get("/", carsController.list);
+
 export default carsRouter;
