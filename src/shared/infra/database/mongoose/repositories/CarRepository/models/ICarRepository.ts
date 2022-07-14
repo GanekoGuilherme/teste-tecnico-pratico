@@ -26,7 +26,7 @@ export default interface ICarRepository {
     licensePlate,
     color,
     brand,
-  }: IUpdateCarDTO): Promise<ICarDTO>;
+  }: IUpdateCarDTO): Promise<ICarDTO | null>;
 
   softDeleteCar(_id: string): Promise<void>;
 
@@ -37,4 +37,6 @@ export default interface ICarRepository {
   listCarTrashed(): Promise<ICarDTO[]>;
 
   findCarByLicensePlate(licensePlate: string): Promise<ICarDTO | null>;
+
+  listCarByLicensePlate(licensePlate: string): Promise<ICarDTO[]>;
 }

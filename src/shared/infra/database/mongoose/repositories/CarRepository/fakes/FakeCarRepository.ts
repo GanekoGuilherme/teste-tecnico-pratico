@@ -38,4 +38,7 @@ export default class CarRepository implements ICarRepository {
   findCarByLicensePlate(licensePlate: string): Promise<ICarDTO | null> {
     throw new Error("Method not implemented.");
   }
+  listCarByLicensePlate(licensePlate: string): Promise<ICarDTO[]> {
+    throw new Error("Method not implemented.");
+  }
 }

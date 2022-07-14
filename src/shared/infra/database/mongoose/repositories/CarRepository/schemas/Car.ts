@@ -19,7 +19,6 @@ const CarSchema = new Schema(
     },
     licensePlate: {
       type: String,
-      unique: true,
       required: true,
     },
     color: {

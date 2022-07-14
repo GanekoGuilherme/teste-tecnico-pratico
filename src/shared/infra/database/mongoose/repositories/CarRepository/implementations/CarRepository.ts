@@ -21,14 +21,22 @@ export default class CarRepository implements ICarRepository {
 
     return car;
   }
-  updateCar({
+
+  async updateCar({
     _id,
     licensePlate,
     color,
     brand,
-  }: IUpdateCarDTO): Promise<ICarDTO> {
-    throw new Error("Method not implemented.");
+  }: IUpdateCarDTO): Promise<ICarDTO | null> {
+    const car = await Car.findOneAndUpdate(
+      { _id },
+      { licensePlate, color, brand },
+      { new: true }
+    );
+
+    return car ?? null;
   }
+
   softDeleteCar(_id: string): Promise<void> {
     throw new Error("Method not implemented.");
   }
@@ -43,8 +51,14 @@ export default class CarRepository implements ICarRepository {
   }
 
   async findCarByLicensePlate(licensePlate: string): Promise<ICarDTO | null> {
-    const car = await Car.findOne({ licensePlate });
+    const car = await Car.findOne({ licensePlate, trashed: false });
 
     return car ?? null;
+  }
+
+  async listCarByLicensePlate(licensePlate: string): Promise<ICarDTO[]> {
+    const car = await Car.find({ licensePlate, trashed: false });
+
+    return car;
   }
 }
