@@ -65,8 +65,12 @@ export default class CarRepository implements ICarRepository {
     return cars;
   }
 
-  listCarTrashed(): Promise<ICarDTO[]> {
-    throw new Error("Method not implemented.");
+  async listCarTrashed(): Promise<ICarDTO[]> {
+    const cars = await Car.find({ trashed: true }).sort({
+      createdAt: -1,
+    });
+
+    return cars;
   }
 
   async findCarByLicensePlate(licensePlate: string): Promise<ICarDTO | null> {

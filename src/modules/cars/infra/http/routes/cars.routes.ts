@@ -18,4 +18,6 @@ carsRouter.post("/recover/:_id", carsController.recover);
 
 carsRouter.get("/", carsController.list);
 
+carsRouter.get("/trashed", carsController.listTrashed);
+
 export default carsRouter;
