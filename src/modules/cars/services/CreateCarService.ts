@@ -1,3 +1,4 @@
+import AppError from "@shared/errors/AppError";
 import ICarRepository, {
   ICreateCarDTO,
 } from "@shared/infra/database/mongoose/repositories/CarRepository/models/ICarRepository";
@@ -22,8 +23,7 @@ export default class CreateCarService {
     );
 
     if (carAlreadyExists) {
-      //TODO criar class AppError
-      throw new Error("License Plate already is unavailable.");
+      throw new AppError("License plate is unavailable.", 400);
     }
 
     const car = await this.carRepository.createCar({
