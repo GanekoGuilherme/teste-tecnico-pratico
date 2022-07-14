@@ -1,4 +1,5 @@
 import CreateCarService from "@modules/cars/services/CreateCarService";
+import FindCarService from "@modules/cars/services/FindCarService";
 import ListCarService from "@modules/cars/services/ListCarService";
 import ListTrashedCarService from "@modules/cars/services/ListTrashedCarService";
 import RecoverCarService from "@modules/cars/services/RecoverCarService";
@@ -74,5 +75,14 @@ export default class CarsController {
     const cars = await listTrashedCarService.execute();
 
     return response.status(200).json(cars);
+  }
+
+  public async find(request: Request, response: Response): Promise<Response> {
+    const { _id } = request.params;
+
+    const findCarService = container.resolve(FindCarService);
+    const car = await findCarService.execute(_id);
+
+    return response.status(200).json(car);
   }
 }

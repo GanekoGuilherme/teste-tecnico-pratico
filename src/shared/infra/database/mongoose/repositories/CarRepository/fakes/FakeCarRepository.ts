@@ -11,6 +11,9 @@ export default class CarRepository implements ICarRepository {
   constructor() {
     this.cars = [];
   }
+  findCar(_id: string): Promise<ICarDTO | null> {
+    throw new Error("Method not implemented.");
+  }
 
   createCar({ licensePlate, color, brand }: ICreateCarDTO): Promise<ICarDTO> {
     throw new Error("Method not implemented.");

@@ -29,6 +29,8 @@ export default interface ICarRepository {
     brand,
   }: IUpdateCarDTO): Promise<ICarDTO | null>;
 
+  findCar(_id: string): Promise<ICarDTO | null>;
+
   softDeleteCar(_id: string): Promise<ICarDTO | null>;
 
   recoverCar(_id: string): Promise<ICarDTO | null>;

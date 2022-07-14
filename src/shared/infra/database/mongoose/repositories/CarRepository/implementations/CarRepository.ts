@@ -37,6 +37,12 @@ export default class CarRepository implements ICarRepository {
     return car ?? null;
   }
 
+  async findCar(_id: string): Promise<ICarDTO | null> {
+    const car = await Car.findOne({ _id, trashed: false });
+
+    return car ?? null;
+  }
+
   async softDeleteCar(_id: string): Promise<ICarDTO | null> {
     const car = await Car.findOneAndUpdate(
       { _id, trashed: false },
