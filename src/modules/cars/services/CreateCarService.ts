@@ -28,8 +28,8 @@ export default class CreateCarService {
 
     const car = await this.carRepository.createCar({
       licensePlate,
-      color,
-      brand,
+      color: color.toUpperCase(),
+      brand: brand.toUpperCase(),
     });
 
     return { car };
