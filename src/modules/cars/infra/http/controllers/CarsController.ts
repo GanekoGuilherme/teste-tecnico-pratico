@@ -1,4 +1,5 @@
 import CreateCarService from "@modules/cars/services/CreateCarService";
+import SoftDeleteCarService from "@modules/cars/services/SoftDeleteCarService";
 import UpdateCarService from "@modules/cars/services/UpdateCarService";
 import { Request, Response } from "express";
 import { container } from "tsyringe";
@@ -26,5 +27,17 @@ export default class CarsController {
     });
 
     return response.status(200).json(car);
+  }
+
+  public async softDelete(
+    request: Request,
+    response: Response
+  ): Promise<Response> {
+    const { _id } = request.params;
+
+    const softDeleteCarService = container.resolve(SoftDeleteCarService);
+    await softDeleteCarService.execute(_id);
+
+    return response.status(200).json({ message: "Car deleted." });
   }
 }

@@ -29,7 +29,7 @@ export default class CarRepository implements ICarRepository {
     brand,
   }: IUpdateCarDTO): Promise<ICarDTO | null> {
     const car = await Car.findOneAndUpdate(
-      { _id },
+      { _id, trashed: false },
       { licensePlate, color, brand },
       { new: true }
     );
@@ -37,8 +37,14 @@ export default class CarRepository implements ICarRepository {
     return car ?? null;
   }
 
-  softDeleteCar(_id: string): Promise<void> {
-    throw new Error("Method not implemented.");
+  async softDeleteCar(_id: string): Promise<ICarDTO | null> {
+    const car = await Car.findOneAndUpdate(
+      { _id, trashed: false },
+      { trashed: true },
+      { new: true }
+    );
+
+    return car ?? null;
   }
   recoveryCar(_id: string): Promise<void> {
     throw new Error("Method not implemented.");

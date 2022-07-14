@@ -23,7 +23,7 @@ export default class CarRepository implements ICarRepository {
   }: IUpdateCarDTO): Promise<ICarDTO> {
     throw new Error("Method not implemented.");
   }
-  softDeleteCar(_id: string): Promise<void> {
+  softDeleteCar(_id: string): Promise<ICarDTO> {
     throw new Error("Method not implemented.");
   }
   recoveryCar(_id: string): Promise<void> {
