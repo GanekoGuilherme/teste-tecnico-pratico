@@ -46,9 +46,17 @@ export default class CarRepository implements ICarRepository {
 
     return car ?? null;
   }
-  recoveryCar(_id: string): Promise<void> {
-    throw new Error("Method not implemented.");
+
+  async recoverCar(_id: string): Promise<ICarDTO | null> {
+    const car = await Car.findOneAndUpdate(
+      { _id, trashed: true },
+      { trashed: false },
+      { new: true }
+    );
+
+    return car ?? null;
   }
+
   listCar({ color, brand }: IListCarDTO): Promise<ICarDTO[]> {
     throw new Error("Method not implemented.");
   }

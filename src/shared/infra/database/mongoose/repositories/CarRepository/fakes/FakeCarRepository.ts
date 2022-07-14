@@ -26,7 +26,7 @@ export default class CarRepository implements ICarRepository {
   softDeleteCar(_id: string): Promise<ICarDTO> {
     throw new Error("Method not implemented.");
   }
-  recoveryCar(_id: string): Promise<void> {
+  recoverCar(_id: string): Promise<ICarDTO> {
     throw new Error("Method not implemented.");
   }
   async listCar({ color, brand }: IListCarDTO): Promise<ICarDTO[]> {

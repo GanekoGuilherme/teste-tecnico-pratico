@@ -30,7 +30,7 @@ export default interface ICarRepository {
 
   softDeleteCar(_id: string): Promise<ICarDTO | null>;
 
-  recoveryCar(_id: string): Promise<void>;
+  recoverCar(_id: string): Promise<ICarDTO | null>;
 
   listCar({ color, brand }: IListCarDTO): Promise<ICarDTO[]>;
 

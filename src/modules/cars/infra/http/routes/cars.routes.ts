@@ -14,4 +14,6 @@ carsRouter.patch("/:_id", updateCarValidate, carsController.update);
 
 carsRouter.delete("/:_id", carsController.softDelete);
 
+carsRouter.post("/recover/:_id", carsController.recover);
+
 export default carsRouter;
