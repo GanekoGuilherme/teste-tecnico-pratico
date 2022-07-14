@@ -21,7 +21,7 @@ export default class CreateCarService {
       licensePlate
     );
 
-    if (!carAlreadyExists) {
+    if (carAlreadyExists) {
       //TODO criar class AppError
       throw new Error("License Plate already is unavailable.");
     }

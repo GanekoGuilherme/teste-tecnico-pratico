@@ -1,8 +1,8 @@
-import CreateCarService from "@modules/car/services/CreateCarService";
+import CreateCarService from "@modules/cars/services/CreateCarService";
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 
-export default class CarController {
+export default class CarsController {
   public async store(request: Request, response: Response): Promise<Response> {
     const { licensePlate, color, brand } = request.body;
 

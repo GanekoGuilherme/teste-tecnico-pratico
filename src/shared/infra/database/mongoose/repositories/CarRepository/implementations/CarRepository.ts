@@ -1,13 +1,25 @@
+import UUID from "@shared/utils/uuid";
 import ICarRepository, {
   ICreateCarDTO,
   IListCarDTO,
   IUpdateCarDTO,
 } from "../models/ICarRepository";
-import { ICarDTO } from "../schemas/Car";
+import Car, { ICarDTO } from "../schemas/Car";
 
 export default class CarRepository implements ICarRepository {
-  createCar({ licensePlate, color, brand }: ICreateCarDTO): Promise<ICarDTO> {
-    throw new Error("Method not implemented.");
+  async createCar({
+    licensePlate,
+    color,
+    brand,
+  }: ICreateCarDTO): Promise<ICarDTO> {
+    const car = await Car.create({
+      _id: new UUID().getV4(),
+      licensePlate,
+      color,
+      brand,
+    });
+
+    return car;
   }
   updateCar({
     _id,
@@ -29,7 +41,10 @@ export default class CarRepository implements ICarRepository {
   listCarTrashed(): Promise<ICarDTO[]> {
     throw new Error("Method not implemented.");
   }
-  findCarByLicensePlate(licensePlate: string): Promise<ICarDTO | null> {
-    throw new Error("Method not implemented.");
+
+  async findCarByLicensePlate(licensePlate: string): Promise<ICarDTO | null> {
+    const car = await Car.findOne({ licensePlate });
+
+    return car ?? null;
   }
 }
