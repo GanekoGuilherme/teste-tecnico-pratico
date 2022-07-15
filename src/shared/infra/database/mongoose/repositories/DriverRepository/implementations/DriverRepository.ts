@@ -1,14 +1,18 @@
+import UUID from "@shared/utils/uuid";
 import IDriverRepository, {
   ICreateDriverDTO,
   IListDriverDTO,
   IUpdateDriverDTO,
 } from "../models/IDriverRepository";
-import { IDriverDTO } from "../schemas/Driver";
+import Driver, { IDriverDTO } from "../schemas/Driver";
 
 export default class DriverRepository implements IDriverRepository {
-  createDriver({ name }: ICreateDriverDTO): Promise<IDriverDTO> {
-    throw new Error("Method not implemented.");
+  async createDriver({ name }: ICreateDriverDTO): Promise<IDriverDTO> {
+    const driver = await Driver.create({ _id: new UUID().getV4(), name });
+
+    return driver;
   }
+
   updateDriver({ _id, name }: IUpdateDriverDTO): Promise<IDriverDTO | null> {
     throw new Error("Method not implemented.");
   }
@@ -27,8 +31,11 @@ export default class DriverRepository implements IDriverRepository {
   listDriverTrashed(): Promise<IDriverDTO[]> {
     throw new Error("Method not implemented.");
   }
-  findDriverByName(name: string): Promise<IDriverDTO | null> {
-    throw new Error("Method not implemented.");
+
+  async findDriverByName(name: string): Promise<IDriverDTO | null> {
+    const driver = await Driver.findOne({ name });
+
+    return driver ?? null;
   }
   listDriverByName(name: string): Promise<IDriverDTO[]> {
     throw new Error("Method not implemented.");
