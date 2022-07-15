@@ -1,4 +1,5 @@
 import CreateRentService from "@modules/rents/services/CreateRentService";
+import FinishRentService from "@modules/rents/services/FinishRentService";
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 
@@ -12,6 +13,15 @@ export default class RentsController {
       carId,
       reason,
     });
+
+    return response.status(201).json(rent);
+  }
+
+  public async finish(request: Request, response: Response): Promise<Response> {
+    const { _id } = request.params;
+
+    const finishRentSerivce = container.resolve(FinishRentService);
+    const rent = await finishRentSerivce.execute(_id);
 
     return response.status(201).json(rent);
   }

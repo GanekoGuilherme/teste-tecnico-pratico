@@ -23,9 +23,16 @@ export default class RentRepository implements IRentRepository {
     return rent;
   }
 
-  finishRent({ _id, endDate }: IFinishRentDTO): Promise<IRentDTO | null> {
-    throw new Error("Method not implemented.");
+  async finishRent({ _id, endDate }: IFinishRentDTO): Promise<IRentDTO | null> {
+    const rent = await Rent.findOneAndUpdate(
+      { _id, endDate: null },
+      { endDate },
+      { new: true }
+    );
+
+    return rent ?? null;
   }
+
   listRent(): Promise<IRentDTO[]> {
     throw new Error("Method not implemented.");
   }

@@ -8,4 +8,6 @@ const rentsRouter = Router();
 
 rentsRouter.post("/", createRentValidate, rentsController.store);
 
+rentsRouter.patch("/:_id", rentsController.finish);
+
 export default rentsRouter;

@@ -10,7 +10,7 @@ const carsRouter = Router();
 
 carsRouter.post("/", createCarValidate, carsController.store);
 
-carsRouter.patch("/:_id", updateCarValidate, carsController.update);
+carsRouter.put("/:_id", updateCarValidate, carsController.update);
 
 carsRouter.delete("/:_id", carsController.softDelete);
 

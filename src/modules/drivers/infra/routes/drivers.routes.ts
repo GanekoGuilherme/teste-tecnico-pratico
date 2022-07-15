@@ -9,7 +9,7 @@ const driversRouter = Router();
 
 driversRouter.post("/", createDriverValidate, driversController.store);
 
-driversRouter.patch("/:_id", updateDriverValidate, driversController.update);
+driversRouter.put("/:_id", updateDriverValidate, driversController.update);
 
 driversRouter.delete("/:_id", driversController.softDelete);
 
