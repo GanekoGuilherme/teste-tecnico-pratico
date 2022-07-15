@@ -13,4 +13,6 @@ driversRouter.patch("/:_id", updateDriverValidate, driversController.update);
 
 driversRouter.delete("/:_id", driversController.softDelete);
 
+driversRouter.post("/recover/:_id", driversController.recover);
+
 export default driversRouter;

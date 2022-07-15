@@ -40,9 +40,16 @@ export default class DriverRepository implements IDriverRepository {
     return driver ?? null;
   }
 
-  recoverDriver(_id: string): Promise<IDriverDTO | null> {
-    throw new Error("Method not implemented.");
+  async recoverDriver(_id: string): Promise<IDriverDTO | null> {
+    const driver = await Driver.findOneAndUpdate(
+      { _id, trashed: true },
+      { trashed: false },
+      { new: true }
+    );
+
+    return driver ?? null;
   }
+
   listDriver(filter: IListDriverDTO): Promise<IDriverDTO[]> {
     throw new Error("Method not implemented.");
   }

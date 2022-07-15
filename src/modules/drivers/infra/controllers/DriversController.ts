@@ -1,4 +1,5 @@
 import CreateDriverService from "@modules/drivers/services/CreateDriverService";
+import RecoverDriverService from "@modules/drivers/services/RecoverDriverService";
 import SoftDeleteDriverService from "@modules/drivers/services/SoftDeleteDriverService";
 import UpdateDriverService from "@modules/drivers/services/UpdateDriverService";
 import { Request, Response } from "express";
@@ -39,5 +40,17 @@ export default class DriversController {
     await softDeleteDriverService.execute(_id);
 
     return response.status(200).json({ message: "Driver deleted." });
+  }
+
+  public async recover(
+    request: Request,
+    response: Response
+  ): Promise<Response> {
+    const { _id } = request.params;
+
+    const recoverDriverService = container.resolve(RecoverDriverService);
+    const driver = await recoverDriverService.execute(_id);
+
+    return response.status(200).json(driver);
   }
 }
