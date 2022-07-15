@@ -1,4 +1,5 @@
 import CreateDriverService from "@modules/drivers/services/CreateDriverService";
+import SoftDeleteDriverService from "@modules/drivers/services/SoftDeleteDriverService";
 import UpdateDriverService from "@modules/drivers/services/UpdateDriverService";
 import { Request, Response } from "express";
 import { container } from "tsyringe";
@@ -26,5 +27,17 @@ export default class DriversController {
     });
 
     return response.status(200).json(driver);
+  }
+
+  public async softDelete(
+    request: Request,
+    response: Response
+  ): Promise<Response> {
+    const { _id } = request.params;
+
+    const softDeleteDriverService = container.resolve(SoftDeleteDriverService);
+    await softDeleteDriverService.execute(_id);
+
+    return response.status(200).json({ message: "Driver deleted." });
   }
 }
