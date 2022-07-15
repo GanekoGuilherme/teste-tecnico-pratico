@@ -17,6 +17,8 @@ driversRouter.post("/recover/:_id", driversController.recover);
 
 driversRouter.get("/", driversController.list);
 
-driversRouter.get("/:_id", driversController.listTrashed);
+driversRouter.get("/trashed", driversController.listTrashed);
+
+driversRouter.get("/:_id", driversController.find);
 
 export default driversRouter;

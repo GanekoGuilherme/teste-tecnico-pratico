@@ -1,4 +1,5 @@
 import CreateDriverService from "@modules/drivers/services/CreateDriverService";
+import FindDriverService from "@modules/drivers/services/FindDriverService";
 import ListDriversService from "@modules/drivers/services/ListDriversService";
 import ListTrashedDriverService from "@modules/drivers/services/ListTrashedDriversService";
 import RecoverDriverService from "@modules/drivers/services/RecoverDriverService";
@@ -77,12 +78,12 @@ export default class DriversController {
     return response.status(200).json(drivers);
   }
 
-  // public async find(request: Request, response: Response): Promise<Response> {
-  //   const { _id } = request.params;
+  public async find(request: Request, response: Response): Promise<Response> {
+    const { _id } = request.params;
 
-  //   const findCarService = container.resolve(FindCarService);
-  //   const car = await findCarService.execute(_id);
+    const findDriverService = container.resolve(FindDriverService);
+    const driver = await findDriverService.execute(_id);
 
-  //   return response.status(200).json(car);
-  // }
+    return response.status(200).json(driver);
+  }
 }
