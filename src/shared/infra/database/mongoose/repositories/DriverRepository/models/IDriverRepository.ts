@@ -31,5 +31,5 @@ export default interface IDriverRepository {
 
   findDriverByName(name: string): Promise<IDriverDTO | null>;
 
-  listDriverByName(name: string): Promise<IDriverDTO[]>;
+  listDriversByName(name: string): Promise<IDriverDTO[]>;
 }

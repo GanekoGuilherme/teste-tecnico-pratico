@@ -13,9 +13,19 @@ export default class DriverRepository implements IDriverRepository {
     return driver;
   }
 
-  updateDriver({ _id, name }: IUpdateDriverDTO): Promise<IDriverDTO | null> {
-    throw new Error("Method not implemented.");
+  async updateDriver({
+    _id,
+    name,
+  }: IUpdateDriverDTO): Promise<IDriverDTO | null> {
+    const driver = await Driver.findOneAndUpdate(
+      { _id, trashed: false },
+      { name },
+      { new: true }
+    );
+
+    return driver ?? null;
   }
+
   findDriver(_id: string): Promise<IDriverDTO | null> {
     throw new Error("Method not implemented.");
   }
@@ -33,11 +43,14 @@ export default class DriverRepository implements IDriverRepository {
   }
 
   async findDriverByName(name: string): Promise<IDriverDTO | null> {
-    const driver = await Driver.findOne({ name });
+    const driver = await Driver.findOne({ name, trashed: false });
 
     return driver ?? null;
   }
-  listDriverByName(name: string): Promise<IDriverDTO[]> {
-    throw new Error("Method not implemented.");
+
+  async listDriversByName(name: string): Promise<IDriverDTO[]> {
+    const drivers = await Driver.find({ name, trashed: false });
+
+    return drivers;
   }
 }
