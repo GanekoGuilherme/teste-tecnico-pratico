@@ -1,5 +1,6 @@
 import CreateRentService from "@modules/rents/services/CreateRentService";
 import FinishRentService from "@modules/rents/services/FinishRentService";
+import ListRentService from "@modules/rents/services/ListRentService";
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 
@@ -23,6 +24,13 @@ export default class RentsController {
     const finishRentSerivce = container.resolve(FinishRentService);
     const rent = await finishRentSerivce.execute(_id);
 
-    return response.status(201).json(rent);
+    return response.status(200).json(rent);
+  }
+
+  public async list(request: Request, response: Response): Promise<Response> {
+    const listRentSerivce = container.resolve(ListRentService);
+    const rents = await listRentSerivce.execute();
+
+    return response.status(200).json(rents);
   }
 }

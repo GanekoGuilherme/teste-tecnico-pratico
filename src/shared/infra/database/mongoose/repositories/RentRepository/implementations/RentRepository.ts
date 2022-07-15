@@ -33,8 +33,12 @@ export default class RentRepository implements IRentRepository {
     return rent ?? null;
   }
 
-  listRent(): Promise<IRentDTO[]> {
-    throw new Error("Method not implemented.");
+  async listRents(): Promise<IRentDTO[]> {
+    const rents = await Rent.find()
+      .populate({ model: "Car", path: "car" })
+      .populate({ model: "Driver", path: "driver" });
+
+    return rents;
   }
 
   async findOneRentByDriverAndEndDateNull(

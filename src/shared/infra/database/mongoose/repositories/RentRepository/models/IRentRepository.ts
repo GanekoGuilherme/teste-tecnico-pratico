@@ -24,7 +24,7 @@ export default interface IRentRepository {
 
   finishRent({ _id, endDate }: IFinishRentDTO): Promise<IRentDTO | null>;
 
-  listRent(): Promise<IRentDTO[]>;
+  listRents(): Promise<IRentDTO[]>;
 
   findOneRentByDriverAndEndDateNull(driver: string): Promise<IRentDTO | null>;
 

@@ -10,4 +10,6 @@ rentsRouter.post("/", createRentValidate, rentsController.store);
 
 rentsRouter.patch("/:_id", rentsController.finish);
 
+rentsRouter.get("/", rentsController.list);
+
 export default rentsRouter;
