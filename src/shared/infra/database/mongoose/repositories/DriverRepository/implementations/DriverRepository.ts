@@ -50,9 +50,14 @@ export default class DriverRepository implements IDriverRepository {
     return driver ?? null;
   }
 
-  listDriver(filter: IListDriverDTO): Promise<IDriverDTO[]> {
-    throw new Error("Method not implemented.");
+  async listDriver(filter: IListDriverDTO): Promise<IDriverDTO[]> {
+    const drivers = await Driver.find(filter).sort({
+      createdAt: -1,
+    });
+
+    return drivers;
   }
+
   listDriverTrashed(): Promise<IDriverDTO[]> {
     throw new Error("Method not implemented.");
   }

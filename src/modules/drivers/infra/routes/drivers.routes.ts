@@ -15,4 +15,6 @@ driversRouter.delete("/:_id", driversController.softDelete);
 
 driversRouter.post("/recover/:_id", driversController.recover);
 
+driversRouter.get("/", driversController.list);
+
 export default driversRouter;

@@ -10,7 +10,7 @@ export interface IUpdateDriverDTO {
 }
 
 export interface IListDriverDTO {
-  name?: string;
+  name?: RegExp;
   trashed: boolean;
 }
 

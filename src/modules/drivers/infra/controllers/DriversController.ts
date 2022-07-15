@@ -1,4 +1,5 @@
 import CreateDriverService from "@modules/drivers/services/CreateDriverService";
+import ListDriversService from "@modules/drivers/services/ListDriversService";
 import RecoverDriverService from "@modules/drivers/services/RecoverDriverService";
 import SoftDeleteDriverService from "@modules/drivers/services/SoftDeleteDriverService";
 import UpdateDriverService from "@modules/drivers/services/UpdateDriverService";
@@ -53,4 +54,32 @@ export default class DriversController {
 
     return response.status(200).json(driver);
   }
+
+  public async list(request: Request, response: Response): Promise<Response> {
+    const listDriversService = container.resolve(ListDriversService);
+    const drivers = await listDriversService.execute({
+      name: request.query.name?.toString(),
+    });
+
+    return response.status(200).json(drivers);
+  }
+
+  // public async listTrashed(
+  //   _request: Request,
+  //   response: Response
+  // ): Promise<Response> {
+  //   const listTrashedCarService = container.resolve(ListTrashedCarService);
+  //   const cars = await listTrashedCarService.execute();
+
+  //   return response.status(200).json(cars);
+  // }
+
+  // public async find(request: Request, response: Response): Promise<Response> {
+  //   const { _id } = request.params;
+
+  //   const findCarService = container.resolve(FindCarService);
+  //   const car = await findCarService.execute(_id);
+
+  //   return response.status(200).json(car);
+  // }
 }
