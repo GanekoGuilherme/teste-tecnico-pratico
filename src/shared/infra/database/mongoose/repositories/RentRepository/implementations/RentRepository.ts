@@ -1,31 +1,46 @@
+import UUID from "@shared/utils/uuid";
 import IRentRepository, {
   ICreateRentDTO,
   IFinishRentDTO,
 } from "../models/IRentRepository";
-import { IRentDTO } from "../schemas/Rent";
+import Rent, { IRentDTO } from "../schemas/Rent";
 
 export default class RentRepository implements IRentRepository {
-  createRent({
-    _id,
+  async createRent({
     startDate,
     driver,
     car,
     reason,
   }: ICreateRentDTO): Promise<IRentDTO> {
-    throw new Error("Method not implemented.");
+    const rent = await Rent.create({
+      _id: new UUID().getV4(),
+      startDate,
+      driver,
+      car,
+      reason,
+    });
+
+    return rent;
   }
+
   finishRent({ _id, endDate }: IFinishRentDTO): Promise<IRentDTO | null> {
     throw new Error("Method not implemented.");
   }
   listRent(): Promise<IRentDTO[]> {
     throw new Error("Method not implemented.");
   }
-  findOneRentByDriverAndEndDateDefined(
+
+  async findOneRentByDriverAndEndDateNull(
     driver: string
   ): Promise<IRentDTO | null> {
-    throw new Error("Method not implemented.");
+    const rent = await Rent.findOne({ driver, endDate: null });
+
+    return rent;
   }
-  findOneRentByCarAndEndDateDefined(car: string): Promise<IRentDTO | null> {
-    throw new Error("Method not implemented.");
+
+  async findOneRentByCarAndEndDateNull(car: string): Promise<IRentDTO | null> {
+    const rent = await Rent.findOne({ car, endDate: null });
+
+    return rent;
   }
 }

@@ -3,7 +3,6 @@ import { IDriverDTO } from "../../DriverRepository/schemas/Driver";
 import { IRentDTO } from "../schemas/Rent";
 
 export interface ICreateRentDTO {
-  _id: string;
   startDate: Date;
   driver: string | IDriverDTO;
   car: string | ICarDTO;
@@ -17,7 +16,6 @@ export interface IFinishRentDTO {
 
 export default interface IRentRepository {
   createRent({
-    _id,
     startDate,
     driver,
     car,
@@ -28,9 +26,7 @@ export default interface IRentRepository {
 
   listRent(): Promise<IRentDTO[]>;
 
-  findOneRentByDriverAndEndDateDefined(
-    driver: string
-  ): Promise<IRentDTO | null>;
+  findOneRentByDriverAndEndDateNull(driver: string): Promise<IRentDTO | null>;
 
-  findOneRentByCarAndEndDateDefined(car: string): Promise<IRentDTO | null>;
+  findOneRentByCarAndEndDateNull(car: string): Promise<IRentDTO | null>;
 }

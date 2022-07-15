@@ -8,7 +8,7 @@ export interface IRentDTO {
   endDate: Date | null;
   driver: string | IDriverDTO;
   car: string | ICarDTO;
-  reason: boolean;
+  reason: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -39,7 +39,7 @@ const RentSchema = new Schema(
       ref: "Car",
     },
     reason: {
-      types: String,
+      type: String,
       required: true,
     },
   },
